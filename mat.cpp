@@ -28,52 +28,62 @@ namespace ariel {
             throw std::invalid_argument("Mat size is always positive");
         }
 
-
         string ans = "";
 
         string matrix[width][height];
 
-        for (int i = 0; i < height; i++) {
+        matrix = func(matrix, width ,height , symbol1 , symbol2);
 
-            for (int j = 0; j < width; j++) {
-//
-//                if (i == 0) {
-//                    ans += symbol1;
-//
-//                    if (j == height-1) {
-//                        ans += '\n';
-//                    }
-//                }
+        for (int i = 0; i < width; i++) {
+
+            for (int j = 0; j < height; j++) {
+
+                if (i == 0 || j == 0 || i == width - 1 || j == height - 1) {
+                    matrix[i][j] = symbol1;
+
+                } else {
+                    std::cout << i << ",";
+                    std::cout << j << endl;
+
+                    matrix[i][j] = symbol2;
 
 
-                if (j == 0) {
-
-                    ans += symbol1;
-                    ans += '\n';
                 }
-
-                if (i ==  height-1 ){
-                    ans += symbol1;
-                    ans += '\n';
-                }
-//                else if (i == 0){}
-
 
 
             }
         }
+        mat(width - 2, height - 2, symbol1, symbol2);
+
+
+
+
+
+        //---------------print--------------------------------
+        for (int i = 0; i < width; i++) {
+
+            for (int j = 0; j < height; j++) {
+
+                std::cout << matrix[i][j] << " ";
+
+            }
+            std::cout << endl;
+        }
+
 
         return ans;
+
 
     }
 
 
-}
 
+
+}
 
 int main() {
 
-    std::cout << ariel::mat(9, 7, '@', '-') << endl;
+    std::cout << ariel::mat(9, 7, '@', '-') << std::endl;
 
 }
 
