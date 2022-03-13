@@ -1,17 +1,17 @@
-//
-// Created by 97252 on 3/8/2022.
-//
-
 #include "mat.hpp"
 #include <stdexcept>
 #include <iostream>
+#include "vector"
 
 using namespace std;
 
 namespace ariel {
 
+
     std::string mat(int width, int height, char symbol1, char symbol2) {
 
+
+        //-----------------------throw-----------------------------------
         //width and height need to be odd
         if (width % 2 == 0 || height % 2 == 0) {
 
@@ -28,65 +28,110 @@ namespace ariel {
             throw std::invalid_argument("Mat size is always positive");
         }
 
-        string ans = "";
 
-        string matrix[width][height];
+        //-----------------------------------------------------------------------------------------------
 
-        matrix = func(matrix, width ,height , symbol1 , symbol2);
+        vector<int> a;
+        vector<int> b;
 
+        a.reserve(width);
         for (int i = 0; i < width; i++) {
+            a.push_back(i);
+        }
+        b.reserve(height);
+        for (int i = 0; i < height; i++) {
+            b.push_back(i);
+        }
 
-            for (int j = 0; j < height; j++) {
+        vector<vector<int>> min;
 
-                if (i == 0 || j == 0 || i == width - 1 || j == height - 1) {
-                    matrix[i][j] = symbol1;
-
+        //find bigger
+        for (int i = 0; i < a.size(); i++) {
+            vector<int> temp;
+            for (int j = 0; j < b.size(); j++) {
+                if (a[i] < b[j]) {
+                    temp.push_back(a[i]);
                 } else {
-                    std::cout << i << ",";
-                    std::cout << j << endl;
-
-                    matrix[i][j] = symbol2;
-
-
+                    temp.push_back(b[j]);
                 }
 
-
             }
+            min.push_back(temp);
         }
-        mat(width - 2, height - 2, symbol1, symbol2);
 
-
-
-
-
-        //---------------print--------------------------------
-        for (int i = 0; i < width; i++) {
-
-            for (int j = 0; j < height; j++) {
-
-                std::cout << matrix[i][j] << " ";
+        int size = min.size() - 1;
+        vector<vector<int>> res;
+        for (int i = size; i >= 0; i--) {
+            vector<int> temp;
+            for (int j = min[i].size() - 1; j >= 0; j--) {
+                temp.push_back(min[i][j]);
 
             }
-            std::cout << endl;
+            res.push_back(temp);
         }
 
 
-        return ans;
+
+        //====================================
+        vector<vector<int>> yossi;
+        for (int i = 0; i < min.size(); i++) {
+            vector<int> temp;
+            for (int j = 0; j < min[i].size(); j++) {
+                if (min[i][j] < res[i][j]) {
+                    temp.push_back(min[i][j]);
+                } else { temp.push_back(res[i][j]); }
+
+            }
+            yossi.push_back(temp);
+
+
+        }
+
+        // mod 2 ;
+        for (int i = 0; i < yossi.size(); i++) {
+            for (int j = 0; j < yossi[i].size(); j++) {
+                yossi[i][j] = yossi[i][j] % 2;
+            }
+        }
+
+
+        //symbol
+        vector<vector<char>> ans;
+        for (int i = 0; i < yossi.size(); i++) {
+            vector<char> temp;
+            for (int j = 0; j < yossi[i].size(); j++) {
+                if (yossi[i][j] == 0) {
+                    temp.push_back(symbol1);
+                } else { temp.push_back(symbol2); }
+
+            }
+            ans.push_back(temp);
+        }
+
+
+
+        string ans1 = "";
+
+        for (int i = 0; i < ans.size(); i++) {
+            for (int j = 0; j < ans[i].size(); j++) {
+                ans1 += ans[i][j];
+
+            }
+            ans1 += '\n';
+
+        }
+
+        return ans1;
 
 
     }
-
-
-
-
 }
 
 int main() {
-
+//
     std::cout << ariel::mat(9, 7, '@', '-') << std::endl;
+    printf("3=============================");
+    return 0;
+
 
 }
-
-
-
-
