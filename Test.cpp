@@ -14,12 +14,11 @@
 
 #include "doctest.h"
 #include "mat.hpp"
-
-using namespace ariel;
-
 #include <string>
 #include <algorithm>
+#include <bits/stdc++.h>
 
+using namespace ariel;
 using namespace std;
 
 /**
@@ -221,7 +220,6 @@ TEST_CASE ("Good input") {
             "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"));
 
 
-
 }
 
 TEST_CASE ("Bad input") {
@@ -229,46 +227,46 @@ TEST_CASE ("Bad input") {
 
 
 //TEST 11
-        // even width
-        CHECK_THROWS(mat(10, 5, '$', '%'));
+    // even width
+    CHECK_THROWS(mat(10, 5, '$', '%'));
 //TEST 12
-        //even height
-        CHECK_THROWS(mat(1, 10, '$', '%'));
+    //even height
+    CHECK_THROWS(mat(1, 10, '$', '%'));
 //TEST 13
-        //negative width
-        CHECK_THROWS(mat(-11, 5, '$', '%'));
+    //negative width
+    CHECK_THROWS(mat(-11, 5, '$', '%'));
 //TEST 14
-        //negative height
-        CHECK_THROWS(mat(1, -11, '$', '%'));
+    //negative height
+    CHECK_THROWS(mat(1, -11, '$', '%'));
 
 
 
 
 //TEST 15
-        //bad  symbol 1 - '\n'
-        CHECK_THROWS(mat(9, 5, '\n', '-'));
+    //bad  symbol 1 - '\n'
+    CHECK_THROWS(mat(9, 5, '\n', '-'));
 //TEST 16
-        //bad symbol 2 '\n'
-        CHECK_THROWS(mat(9, 5, '$', '\n'));
+    //bad symbol 2 '\n'
+    CHECK_THROWS(mat(9, 5, '$', '\n'));
 //TEST 17
-        //bad  symbol 1 '\t'
-        CHECK_THROWS(mat(9, 5, '\t', '-'));
+    //bad  symbol 1 '\t'
+    CHECK_THROWS(mat(9, 5, '\t', '-'));
 //TEST 18
-        //bad symbol 2 '\t'
-        CHECK_THROWS(mat(9, 5, '%', '\t'));
+    //bad symbol 2 '\t'
+    CHECK_THROWS(mat(9, 5, '%', '\t'));
 //TEST 19
-        //bad  symbol 1 '\r'
-        CHECK_THROWS(mat(9, 5, '\r', '-'));
+    //bad  symbol 1 '\r'
+    CHECK_THROWS(mat(9, 5, '\r', '-'));
 //TEST 20
-        //bad symbol 2 '\r'
-        CHECK_THROWS(mat(9, 5, '%', '\r'));
+    //bad symbol 2 '\r'
+    CHECK_THROWS(mat(9, 5, '%', '\r'));
 
 //TEST 21
-        //bad  symbol 1 ' '
-        CHECK_THROWS(mat(9, 5, ' ', '-'));
+    //bad  symbol 1 ' '
+    CHECK_THROWS(mat(9, 5, ' ', '-'));
 //TEST 22
-        //bad symbol 2  ' '
-        CHECK_THROWS(mat(9, 5, '%', ' '));
+    //bad symbol 2  ' '
+    CHECK_THROWS(mat(9, 5, '%', ' '));
 
 }
 

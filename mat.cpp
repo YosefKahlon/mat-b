@@ -208,11 +208,3 @@ namespace ariel {
 
 }
 
-//int main() {
-//////
-//    std::cout << ariel::mat(9, 7, '+', '-') << std::endl;
-////    printf("3=============================");
-//    return 0;
-//
-//
-//}
