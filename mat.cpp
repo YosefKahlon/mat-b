@@ -14,13 +14,13 @@ namespace ariel {
 
     vector<int> add_number(int n);
 
-    vector<vector<int>> get_min(vector<int> a, vector<int> b);
+    vector <vector<int>> get_min(vector<int> a, vector<int> b);
 
-    vector<vector<int>> upside(vector<vector<int>> vector1, int size);
+    vector <vector<int>> upside(vector <vector<int>> min, int height, int width);
 
-    vector<vector<int>> merge_min(vector<vector<int>> vector1, vector<vector<int>> vector2);
+    vector <vector<int>> merge_min(vector <vector<int>> min, vector <vector<int>> reverse);
 
-    vector<vector<char>> symbol(vector<vector<int>> vector1, char symbol1, char symbol2);
+    vector <vector<char>> symbol(vector <vector<int>> togther, char symbol1, char symbol2);
 
     std::string mat(int width, int height, char symbol1, char symbol2) {
 
@@ -31,8 +31,8 @@ namespace ariel {
 
             throw std::invalid_argument("Mat size is always odd");
         }
-        //bad symbol
-        if (symbol1 < 33 || symbol2 < 33) {
+        // ! = 33 , ~ = 126
+        if (symbol1 < '!' || symbol2 < '!' || symbol1 > '~' || symbol2 > '~') {
 
             throw std::invalid_argument(" whitespace ,space, newline and tab are not valid symbol ! ");
         }
@@ -52,8 +52,8 @@ namespace ariel {
         }
 
 
-            // if height = 1 no need to continue
-        else if (height == 1) {
+        // if height = 1 no need to continue
+        if (height == 1) {
             answer = just_width(width, symbol1);
             return answer;
         }
@@ -64,16 +64,16 @@ namespace ariel {
 
 
         //find the minimum between a and b for each row
-        vector<vector<int>> min = get_min(a, b);
+        vector <vector<int>> min = get_min(a, b);
 
 
         //upside min and revers the row
-        int size = min.size() - 1;
-        vector<vector<int>> reverse = upside(min, size);
+        //int size = min.size() - 1;
+        vector <vector<int>> reverse = upside(min, height, width);
 
 
         //take the minimum number from min and reverse and insert to a new vector
-        vector<vector<int>> togther = merge_min(min, reverse);
+        vector <vector<int>> togther = merge_min(min, reverse);
 
 
         // modulo 2 the vector ;
@@ -84,7 +84,7 @@ namespace ariel {
         }
 
         // change number to symbols
-        vector<vector<char>> ans = symbol(togther, symbol1, symbol2);
+        vector <vector<char>> ans = symbol(togther, symbol1, symbol2);
 
         //convert vector to string
         for (int i = 0; i < ans.size(); i++) {
@@ -99,8 +99,8 @@ namespace ariel {
 
     }
 
-    vector<vector<char>> symbol(vector<vector<int>> togther, char symbol1, char symbol2) {
-        vector<vector<char>> ans;
+    vector <vector<char>> symbol(vector <vector<int>> togther, char symbol1, char symbol2) {
+        vector <vector<char>> ans;
         for (int i = 0; i < togther.size(); i++) {
             vector<char> temp;
             for (int j = 0; j < togther.at(i).size(); j++) {
@@ -115,8 +115,8 @@ namespace ariel {
     }
 
 
-    vector<vector<int>> merge_min(vector<vector<int>> min, vector<vector<int>> reverse) {
-        vector<vector<int>> togther;
+    vector <vector<int>> merge_min(vector <vector<int>> min, vector <vector<int>> reverse) {
+        vector <vector<int>> togther;
         for (int i = 0; i < min.size(); i++) {
             vector<int> temp;
             for (int j = 0; j < min.at(i).size(); j++) {
@@ -131,11 +131,11 @@ namespace ariel {
         return togther;
     }
 
-    vector<vector<int>> upside(vector<vector<int>> min, int size) {
-        vector<vector<int>> reverse;
-        for (int i = size; i >= 0; i--) {
+    vector <vector<int>> upside(vector <vector<int>> min, int height, int width) {
+        vector <vector<int>> reverse;
+        for (int i = height - 1; i >= 0; i--) {
             vector<int> temp;
-            for (int j = min.at(i).size() - 1; j >= 0; j--) {
+            for (int j = width - 1; j >= 0; j--) {
                 temp.push_back(min.at(i).at(j));
             }
             reverse.push_back(temp);
@@ -143,9 +143,9 @@ namespace ariel {
         return reverse;
     }
 
-    vector<vector<int>> get_min(vector<int> a, vector<int> b) {
+    vector <vector<int>> get_min(vector<int> a, vector<int> b) {
 
-        vector<vector<int>> vector_min;
+        vector <vector<int>> vector_min;
 
         if (a.size() > b.size()) {
 
@@ -208,11 +208,11 @@ namespace ariel {
 
 }
 
-int main() {
-////
-    std::cout << ariel::mat(9, 7, '+', '-') << std::endl;
-//    printf("3=============================");
-    return 0;
-
-
-}
+//int main() {
+//////
+//    std::cout << ariel::mat(9, 7, '+', '-') << std::endl;
+////    printf("3=============================");
+//    return 0;
+//
+//
+//}
