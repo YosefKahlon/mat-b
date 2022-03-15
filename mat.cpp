@@ -20,7 +20,37 @@ namespace ariel {
 
     vector <vector<int>> merge_min(vector <vector<int>> min, vector <vector<int>> reverse);
 
-    vector <vector<char>> symbol(vector <vector<int>> togther, char symbol1, char symbol2);
+    vector <vector<char>> symbol(vector <vector<int>> together, char symbol1, char symbol2);
+
+
+
+
+
+
+
+
+    /**
+     * This function get input and return mat .
+     * the algorithm step by step :
+     * 1. create vector of vector(2D array) of min( (0 - (width-1) ) , (0 - (height-1)) ) . let's call it min_2D.
+     * 2. create vector of vector(2D array) as a reverse of the rows and the cols of the the 2D array we create above. let's call it reverse_2D.
+     * 3. create vector of vector (2D array) of the minimum between each number in every rows and cols between min_2D and reverse_2D .let's call it together.
+     * 4. modulo by 2 the the 2D array - together .
+     * 5. create vector of vector (2D array of char)  let's call it answer_2D.
+     * 6. if together_2D at row i in positions j = 0 add to answer_2D symbol1 else add to answer_2D symbol2.
+     * 7. transfer answer_2D into string.
+     * 8. return string .
+     * @param width positive odd number.
+     * @param height positive odd number.
+     * @param symbol1 any  33 < symbol < 126.
+     * @param symbol2 any  33 < symbol < 126.
+     * @return string represent the mat .
+     */
+
+
+
+
+
 
     std::string mat(int width, int height, char symbol1, char symbol2) {
 
@@ -64,32 +94,32 @@ namespace ariel {
 
 
         //find the minimum between a and b for each row
-        vector <vector<int>> min = get_min(a, b);
+        vector <vector<int>> min_2D = get_min(a, b);
 
 
         //upside min and revers the row
         //int size = min.size() - 1;
-        vector <vector<int>> reverse = upside(min, height, width);
+        vector <vector<int>> reverse_2D = upside(min_2D, height, width);
 
 
         //take the minimum number from min and reverse and insert to a new vector
-        vector <vector<int>> togther = merge_min(min, reverse);
+        vector <vector<int>> together_2D = merge_min(min_2D, reverse_2D);
 
 
         // modulo 2 the vector ;
-        for (int i = 0; i < togther.size(); i++) {
-            for (int j = 0; j < togther.at(i).size(); j++) {
-                togther.at(i).at(j) = togther.at(i).at(j) % 2;
+        for (int i = 0; i < together_2D.size(); i++) {
+            for (int j = 0; j < together_2D.at(i).size(); j++) {
+                together_2D.at(i).at(j) = together_2D.at(i).at(j) % 2;
             }
         }
 
         // change number to symbols
-        vector <vector<char>> ans = symbol(togther, symbol1, symbol2);
+        vector <vector<char>> ans_2D = symbol(together_2D, symbol1, symbol2);
 
         //convert vector to string
-        for (int i = 0; i < ans.size(); i++) {
-            for (int j = 0; j < ans.at(i).size(); j++) {
-                answer += ans.at(i).at(j);
+        for (int i = 0; i < ans_2D.size(); i++) {
+            for (int j = 0; j < ans_2D.at(i).size(); j++) {
+                answer += ans_2D.at(i).at(j);
             }
             answer += '\n';
         }
@@ -99,12 +129,12 @@ namespace ariel {
 
     }
 
-    vector <vector<char>> symbol(vector <vector<int>> togther, char symbol1, char symbol2) {
+    vector <vector<char>> symbol(vector <vector<int>> together, char symbol1, char symbol2) {
         vector <vector<char>> ans;
-        for (int i = 0; i < togther.size(); i++) {
+        for (int i = 0; i < together.size(); i++) {
             vector<char> temp;
-            for (int j = 0; j < togther.at(i).size(); j++) {
-                if (togther.at(i).at(j) == 0) {
+            for (int j = 0; j < together.at(i).size(); j++) {
+                if (together.at(i).at(j) == 0) {
                     temp.push_back(symbol1);
                 } else { temp.push_back(symbol2); }
 
@@ -116,7 +146,7 @@ namespace ariel {
 
 
     vector <vector<int>> merge_min(vector <vector<int>> min, vector <vector<int>> reverse) {
-        vector <vector<int>> togther;
+        vector <vector<int>> together;
         for (int i = 0; i < min.size(); i++) {
             vector<int> temp;
             for (int j = 0; j < min.at(i).size(); j++) {
@@ -125,10 +155,10 @@ namespace ariel {
                 } else { temp.push_back(reverse.at(i).at(j)); }
 
             }
-            togther.push_back(temp);
+            together.push_back(temp);
 
         }
-        return togther;
+        return together;
     }
 
     vector <vector<int>> upside(vector <vector<int>> min, int height, int width) {

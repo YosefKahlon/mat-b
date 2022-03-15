@@ -16,7 +16,7 @@ using namespace ariel;
 
 int main() {
 
-    printf("-----inpot from client----- \n");
+    printf("-----input from client----- \n");
 
     int width, height;
     char symbol1, symbol2;
