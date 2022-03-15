@@ -38,7 +38,7 @@ namespace ariel {
      * 4. modulo by 2 the the 2D array - together .
      * 5. create vector of vector (2D array of char)  let's call it answer_2D.
      * 6. if together_2D at row i in positions j = 0 add to answer_2D symbol1 else add to answer_2D symbol2.
-     * 7. transfer answer_2D into string.
+     * 7. convert answer_2D into string.
      * 8. return string .
      * @param width positive odd number.
      * @param height positive odd number.
