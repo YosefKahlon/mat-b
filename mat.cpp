@@ -45,6 +45,8 @@ namespace ariel {
      * @param symbol1 any  33 < symbol < 126.
      * @param symbol2 any  33 < symbol < 126.
      * @return string represent the mat .
+     *
+     *i took the idea from the comment https://codegolf.stackexchange.com/questions/241219/mat-printing-matrix
      */
 
 
